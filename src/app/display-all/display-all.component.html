@@ -1,0 +1,9 @@
+<div>
+    <mat-grid-list cols="5">
+        <mat-grid-tile *ngFor="let quiz of quizes">
+            <app-quiz 
+            [quizInput]="quiz"></app-quiz>
+  
+        </mat-grid-tile>
+      </mat-grid-list>
+</div>

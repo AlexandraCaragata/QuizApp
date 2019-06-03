@@ -1,0 +1,13 @@
+<div>
+Quiz title: {{quiz?.title}}
+</div>
+<mat-form-field>
+  <mat-label *ngFor="let questions of quiz?.questions">{{question?.title}}</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let option of question?.options">
+      {{option?.answer}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
