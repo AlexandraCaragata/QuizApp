@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { QuizActions } from '../quiz.actions';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -14,25 +15,23 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 })
 export class CreateQuizComponent implements OnInit {
   createQuiz: FormGroup;
-  private quizCollection: AngularFirestoreCollection<Quiz>;
-  quizes: Observable<Quiz[]>
-
-  constructor(private fb: FormBuilder,
+  quizes: Quiz[];
+  constructor(private fb: FormBuilder,private af: AngularFireAuth,
     private router: Router, private quizActions: QuizActions, private afs: AngularFirestore) {
-      this.quizCollection =afs.collection<Quiz>('quizes');
-      this.quizes = this.quizCollection.valueChanges();
+
      }
 
-  saveQuiz() {
-    console.log(this.createQuiz.value);
-    //make this async
-    
+  saveQuiz() {  
     let quiz = this.createQuiz.value as Quiz;
-    this.quizActions.createQuiz(quiz);
-    this.quizCollection.add(quiz);
-    quiz._id= this.quizCollection.ref.doc().id;
-    console.log(quiz._id);
-    this.router.navigate(['home/display-all']);
+    this.afs.collection('users').doc(this.af.auth.currentUser.uid).get().subscribe(
+      doc =>{
+        this.quizActions.createQuiz(quiz, doc.data().username, this.af.auth.currentUser.uid);
+        this.router.navigate(['home/display-all']);
+      }
+    )
+    this.afs.collection('users').doc(this.af.auth.currentUser.uid).update(this.quizes)
+  
+    
     
   }
 
@@ -52,9 +51,7 @@ export class CreateQuizComponent implements OnInit {
   createNewOption(questionIndex: number){
     const option = this.createNewOptionGroup();
     const questions = this.createQuiz.controls.questions as FormArray;
-    // console.log(questions);
     const options = (<FormArray>questions.controls[questionIndex]).controls['options'] as FormArray;
-    // console.log(options);
     options.push(option);
   }
   private createNewOptionGroup(): FormGroup {

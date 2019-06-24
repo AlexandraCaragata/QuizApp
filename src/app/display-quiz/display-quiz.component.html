@@ -1,13 +1,20 @@
-<div>
-Quiz title: {{quiz?.title}}
-</div>
-<mat-form-field>
-  <mat-label *ngFor="let questions of quiz?.questions">{{question?.title}}</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let option of question?.options">
-      {{option?.answer}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{quiz?.title}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p id="example-radio-group-label" *ngFor="let question of quiz?.questions"> {{question?.title}}
+        <mat-radio-group class="example-radio-group" [(ngModel)]="option" *ngFor=" let question of quiz?.questions">
+          <mat-radio-button class="example-radio-button" *ngFor="let option of question?.options"
+            [value]="option?.answer">
+            {{option?.answer}}
+          </mat-radio-button>
+        </mat-radio-group>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button> Submit </button>
+  </mat-card-actions>
+</mat-card>

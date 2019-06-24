@@ -1,13 +1,14 @@
 <mat-card (click)="onQuizClick(quizInput)">
   <mat-card-header>
-    <mat-card-title>{{quizInput.title}}</mat-card-title>
-    <mat-card-subtitle>{{quizInput.created}}</mat-card-subtitle>
+    <mat-card-title>{{quizInput.title | uppercase}}</mat-card-title>
+    <mat-card-subtitle>{{quizInput?.created?.toDate() | date:'dd/MM/yyyy'}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-subtitle>Created by: </mat-card-subtitle>
+  <mat-card-subtitle>Created by: {{quizInput.username}} </mat-card-subtitle>
   <mat-card-content>
     <p>In this quiz we have {{quizInput.questions.length}} question{{quizInput.questions.length>1 || quizInput.questions.length===0?'s':''}}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" routerLink="../display-quiz/{{quizInput._id}}" >Start Quiz</button>
+    <button mat-raised-button color="primary" *ngIf="show">Delete</button>
   </mat-card-actions>
 </mat-card>

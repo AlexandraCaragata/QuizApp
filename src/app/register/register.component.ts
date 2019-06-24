@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private auth: AuthService, private router: Router, 
-    private formBuilder: FormBuilder, private store: AngularFirestore) { }
+    private formBuilder: FormBuilder, private store: AngularFirestore, private af: AngularFireAuth) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -36,14 +36,10 @@ export class RegisterComponent implements OnInit {
   onSubmit(){
 
     this.user = this.registerForm.value;
-
-    this.auth.register(this.user.email, this.user.password)
-
-    this.store.collection('users').add(this.user);
+    this.auth.register(this.user.email, this.user.password, this.user)
     if(this.registerForm.invalid){
       return;
     }
-    
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('home/display-all');
   }
   }

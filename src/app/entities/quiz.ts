@@ -2,12 +2,12 @@ import { User } from '../entities/user';
 
 export class Quiz {
   _id: string;
-  user: User;
+  username: string;
   title: string;
   created?: Date;
   questions: Question[]; 
   ratings?: Rating[];
-  customerId: string;
+  userId: string;
 
 }
 export class Question {

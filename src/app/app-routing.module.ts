@@ -10,6 +10,7 @@ import { AuthService } from './auth/auth.service';
 import { Quiz } from './entities/quiz';
 import { QuizComponent } from './quiz/quiz.component';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
+import { MyQuizesComponent } from './my-quizes/my-quizes.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent, pathMatch:'full'},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path:'home', component:HomeComponent, canActivate:[AuthGuard], children:[
     {path:'create-quiz', component: CreateQuizComponent  /*canActivate:[AuthGuard]*/},
     {path:'display-all',component:DisplayAllComponent  /*canActivate:[AuthGuard]*/},
-    {path:'display-quiz/:id', component:DisplayQuizComponent}
+    {path:'display-quiz/:id', component:DisplayQuizComponent},
+    {path:'my-quizes', component:MyQuizesComponent}
   ]}
 
 ];

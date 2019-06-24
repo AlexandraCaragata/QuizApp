@@ -33,6 +33,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import {MatSelectModule } from '@angular/material/select';
+import { QuizPipe } from './quiz.pipe';
+import { MyQuizesComponent } from './my-quizes/my-quizes.component';
+import { UserPipePipe } from './user-pipe.pipe';
 
 
 
@@ -46,6 +49,9 @@ import {MatSelectModule } from '@angular/material/select';
     DisplayAllComponent,
     QuizComponent,
     DisplayQuizComponent,
+    QuizPipe,
+    MyQuizesComponent,
+    UserPipePipe,
     
   ],
   imports: [

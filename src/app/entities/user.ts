@@ -1,9 +1,12 @@
+import { Quiz } from './quiz';
+
 class IUser {
     _id: string;
     name: string;
     username: string;
     email: string;
     password: string;
+    quizes: Quiz[];
 }
 
 export class User implements IUser {
@@ -12,6 +15,7 @@ export class User implements IUser {
     username: string;
     email: string;
     password: string;
+    quizes : Quiz[];
 
     constructor(user?: IUser | firebase.User) {
         if (user) {

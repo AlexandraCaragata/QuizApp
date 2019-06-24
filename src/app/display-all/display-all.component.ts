@@ -17,25 +17,18 @@ import { QuizApiService } from '../quiz-api.service';
 export class DisplayAllComponent implements OnInit {
 
   quizes: Quiz[];
-  quiz: any;
+  isLoading: boolean;
 
-  constructor(private fb: FormBuilder, private ngRedux: NgRedux<AppState>,
-    private router: Router, private quizActions: QuizActions, private afs: AngularFirestore,
-    private api: QuizApiService, private store: AngularFirestore, private route: ActivatedRoute) { }
+  constructor( private ngRedux: NgRedux<AppState>, private quizActions: QuizActions) { }
 
 
   ngOnInit() {
 
-    this.api.getAllQuizes().subscribe(data => {
-      this.quizes = data.map(e => {
-        return {
-          _id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Quiz[];
-
-      })
-    })
+    this.ngRedux.select(state => state.quizes).subscribe( result =>{
+      this.quizes = result.quizes;
+      this.isLoading = result.isLoading;
+      
+    });
+    this.quizActions.getAllQuizes(); 
   }
-
-
 }

@@ -56,9 +56,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     ).subscribe(result =>{
       this.router.navigateByUrl('home/display-all')
       console.log(this.af.auth.currentUser)
-      // disable
     }, reason =>{
-      // enable show error
+      console.error(reason)
     })
   
   }

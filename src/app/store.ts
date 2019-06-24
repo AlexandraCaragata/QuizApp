@@ -4,14 +4,16 @@ import { quizReducer } from './quiz.reducer';
 import { Quiz } from './entities/quiz';
 
 export class QuizState {
-  quizzes: Quiz[];
+  quizes: Quiz[];
+  isLoading: boolean;
+  isLoggedIn?: boolean;
   
 }
 
 export class AppState {
-  quizzes?: QuizState;
+  quizes?: QuizState;
 }
 export const rootReducer = combineReducers<AppState>({
-  quizzes: quizReducer,
+  quizes: quizReducer,
   router: routerReducer
 } as any);

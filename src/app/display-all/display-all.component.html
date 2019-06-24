@@ -1,6 +1,14 @@
+<div *ngIf="isLoading">
+        Please wait, we are loading the quizzes
+      </div>
 <div>
     <mat-grid-list cols="5">
-        <mat-grid-tile *ngFor="let quiz of quizes">
+            <div>
+             <mat-form-field >
+              <input matInput placeholder="Search quiz" value="" [(ngModel)]="userSearch">
+            </mat-form-field>
+            </div>
+        <mat-grid-tile *ngFor="let quiz of quizes | quizPipe: userSearch">
             <app-quiz 
             [quizInput]="quiz"></app-quiz>
   

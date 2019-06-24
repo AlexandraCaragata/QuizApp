@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -11,15 +12,23 @@ import { ActivatedRoute } from '@angular/router';
 export class DisplayQuizComponent implements OnInit {
 
   quiz: any;
+  questions : any;
+  quizform: FormGroup;
+  option: string;
 
-  constructor(private store: AngularFirestore, private route:ActivatedRoute) { }
+  constructor(private store: AngularFirestore, private route:ActivatedRoute, private fb: FormBuilder) { 
+    
+  }
 
   ngOnInit() {
       
       this.store.collection('quizes').doc(this.route.snapshot.params.id).get().subscribe( response =>{
         if(response.exists){
           this.quiz= response.data();
-          console.log(this.quiz);
+          this.questions = response.data().questions;
+          console.log(this.questions[0].options[0].answer);
+          console.log(this.quiz.questions[0].title);
+          console.log(this.quiz.questions[0].options);
         }
         
       });

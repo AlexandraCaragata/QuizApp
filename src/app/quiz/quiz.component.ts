@@ -16,17 +16,12 @@ export class QuizComponent implements OnInit {
   @Output() quizClicked: EventEmitter<Quiz> = new EventEmitter<Quiz>(); 
 
   quiz:any;
+  show: true;
 
   constructor(private store:AngularFirestore, private route: ActivatedRoute, private router: Router ) { }
 
   ngOnInit() {
-    /*if (!this.quizInput) {
-      this.store.collection('quizes').get(this.route.snapshot.params.id).subscribe((response: QuerySnapshot<Quiz>) => {
-        this.quizInput = response[0];
-      })
-    }*/
     
-
   }
   
   
