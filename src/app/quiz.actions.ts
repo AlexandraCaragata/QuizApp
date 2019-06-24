@@ -73,6 +73,9 @@ export class QuizActions {
   }
 
   deleteQuiz(quiz: Quiz): void {
+    this.api.deleteQuiz(quiz).then(() =>{
+      console.log("Document succesfully deleted");
+    })
     this.ngRedux.dispatch({
       type: QuizActions.DELETE_QUIZ,
       payload: quiz

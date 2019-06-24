@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { NgRedux } from '@angular-redux/store';
 import { AppState } from '../store';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { store } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-my-quizes',
@@ -19,20 +20,23 @@ export class MyQuizesComponent implements OnInit {
   isLoading: boolean;
   show: true;
 
-  constructor(private ngRedux: NgRedux<AppState>, private quizActions: QuizActions) { }
+  constructor(private ngRedux: NgRedux<AppState>, private quizActions: QuizActions, private store: AngularFirestore) { }
 
 
   ngOnInit() {
-    this.ngRedux.select(state => state.quizes).subscribe( result =>{
+    this.ngRedux.select(state => state.quizes).subscribe(result => {
       this.quizes = result.quizes;
       this.isLoading = result.isLoading;
-      
+
     });
-    this.quizActions.getUserQuizes(); 
+    this.quizActions.getUserQuizes();
     console.log(this.quizes)
   }
 
-  onQuizClicked(quiz: Quiz){
-    console.log(quiz);
+  delete(quiz: Quiz) {
+    this.store.collection('quizes').doc(quiz._id).delete().then(
+      () => {
+        console.log("success");
+      });
   }
 }

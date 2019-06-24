@@ -1,13 +1,13 @@
-<div *ngIf = "isLoading">
+<div *ngIf="isLoading">
   Wait just for a bit we are loading your quizes
 </div>
 <div>
-    <mat-grid-list cols="5">
-        <mat-grid-tile *ngFor="let quiz of quizes">
-            <app-quiz 
-            [quizInput]="quiz"></app-quiz>
-  
-        </mat-grid-tile>
-      </mat-grid-list>
+  <mat-grid-list cols="5">
+    <mat-grid-tile *ngFor="let quiz of quizes">
+      <app-quiz [quizInput]="quiz"></app-quiz>
+      <button mat-button (click)="delete(quiz)">Delete</button>
+
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
 <router-outlet></router-outlet>

@@ -30,5 +30,6 @@ export class DisplayAllComponent implements OnInit {
       
     });
     this.quizActions.getAllQuizes(); 
+  
   }
 }

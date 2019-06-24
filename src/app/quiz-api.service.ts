@@ -21,5 +21,9 @@ export class QuizApiService {
     quiz.userId = uid;
     return this.store.collection('quizes').add(quiz);
   }
+
+  deleteQuiz(quiz: Quiz){
+    return this.store.collection('quizes').doc(quiz._id).delete();
+  }
   
 }
